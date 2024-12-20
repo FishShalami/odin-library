@@ -48,3 +48,16 @@ addBookToLibrary("Book!", "Bob Jones", "300 pages", "read");
 
 addBookToLibrary("Mockingbird", "Sean Jonathan", "900 pages", "not read");
 
+libraryLoop(myLibrary) 
+
+const newBookButton = document.querySelector('button.newBook');
+const dialog = document.querySelector('dialog');
+const closeButton = document.querySelector('button.dialogClose');
+
+newBookButton.addEventListener('click', () => {
+    dialog.showModal();
+}); 
+
+closeButton.addEventListener("click", () => {
+    dialog.close();
+  });

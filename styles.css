@@ -1,3 +1,28 @@
+body {
+    margin: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+button.newBook {
+    background-color: rgb(48, 121, 218);
+    border: black solid 1px;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+button.newBook:hover {
+    background-color: rgb(28, 141, 75);
+    border: black solid 1px;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 1.5rem;
+}
+
 .library {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -17,11 +42,22 @@
 }
 
 .libraryCard > .bookTitle {
-    font-size: 20px;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
 .libraryCard > .bookAuth {
-    font-size: 16px;
+    font-size: 1rem;
     font-style: italic;
 }
+
+::backdrop {
+    background-image: linear-gradient(
+      45deg,
+      magenta,
+      rebeccapurple,
+      dodgerblue,
+      green
+    );
+    opacity: 0.75;
+  }
