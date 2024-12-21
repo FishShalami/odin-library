@@ -31,7 +31,7 @@ function libraryLoop() {
         
         const cardTitle = document.createElement('p');
         cardTitle.classList.add('bookTitle');
-        cardTitle.innerText = `Title: ${book.title}`;
+        cardTitle.innerText = `${book.title}`;
         
         const cardAuthor = document.createElement('p');
         cardAuthor.classList.add('bookAuth');
@@ -45,7 +45,19 @@ function libraryLoop() {
         cardRead.classList.add('bookRead');
         cardRead.innerText = `Read: ${book.read === "read" ? "Yes" : "No"}`;
 
-        libraryCard.append(cardTitle, cardAuthor, cardPages, cardRead);
+        const cardButtons = document.createElement('div');
+        cardButtons.classList.add('cardButtons');
+        
+        const delBookButton = document.createElement('button');
+        delBookButton.classList.add('delBook');
+        delBookButton.innerText = 'Delete';
+
+        const readBookButton = document.createElement('button');
+        readBookButton.classList.add('readBook');
+        readBookButton.innerText = 'Read Book';
+
+        cardButtons.append(delBookButton, readBookButton);
+        libraryCard.append(cardTitle, cardAuthor, cardPages, cardRead, cardButtons);
         library.appendChild(libraryCard);
     }
 }
