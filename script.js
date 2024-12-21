@@ -92,6 +92,23 @@ document.querySelector('form[name="addBook"]').addEventListener("submit", (event
 });
 
 
+library.addEventListener('click', (event) => {
+    if (event.target.classList.contains('delBook')) {
+        // Find the book index using the card title
+        const card = event.target.closest('.libraryCard');
+        const title = card.querySelector('.bookTitle').innerText;
+
+        // Find the book in the array and remove it
+        const index = myLibrary.findIndex(book => book.title === title);
+        if (index !== -1) {
+            myLibrary.splice(index, 1); // Remove book from array
+            libraryLoop(); // Refresh library display
+        }
+    }
+});
+
+
+
 addBookToLibrary("Another Book!", "Sean Connery", "200 pages", "read");
 
 addBookToLibrary("More Books", "Tim Letterman", "100 pages", "notRead");
