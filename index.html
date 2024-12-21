@@ -10,9 +10,33 @@
     <h1>My Library</h1>
     <div class="headerButtons">
         <button class="newBook">New Book</button>
-    <dialog>        
-        <button autofocus class = 'dialogClose'>Close</button>
-        <p>This is a dialog</p>
+    <dialog>  
+        <form action="index.html" method="dialog" name="addBook">
+            <h2>Add a book!</h2>
+            <label autofocus for="bookTitle" >Book title:</label>
+            <input type="text" id="bookTitle" name="title" required><br><br>
+            <label for="bookAuthor">Book author:</label>
+            <input type="text" id="bookAuthor" name="author" placeholder="John Edwards" required><br><br>
+            <label for="pages">Number of Pages:</label>
+            <input type="number" id="pages" name="pages" placeholder="200" required><br><br>
+            <fieldset>
+                <legend>Already read?</legend>
+                <div>
+                    <input type="radio" id="read" name="readYN" value="read" checked />
+                    <label for="read">Read</label>
+                  </div>
+                
+                  <div>
+                    <input type="radio" id="notRead" name="readYN" value="notRead" />
+                    <label for="notRead">Not Read</label>
+                  </div>
+            </fieldset>
+            <div class="formButtons">
+                <button  type = 'submit' class = 'formSubmit'>Submit</button>
+                <button class = 'dialogClose'>Close</button>
+            </div>
+        </form>  
+        
     </dialog>
     </div>
     <div class="library"></div>
