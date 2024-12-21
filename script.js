@@ -12,6 +12,15 @@ Book.prototype.info = function() {
     return this.title + ", " + this.author + ", " + this.pages + ", " + this.read;
 }
 
+Book.prototype.readStatus = function() {
+    if (this.read === 'notRead') {
+        this.read = 'read';
+    } else {
+        this.read = 'notRead'
+    }
+    libraryLoop()
+};
+
 function addBookToLibrary(title, author, pages, read) {
     let  newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
@@ -25,6 +34,18 @@ const library = document.querySelector(".library");
 
 function libraryLoop() {
     library.innerHTML = ""; // Clear existing content
+    // myLibrary sort
+
+    myLibrary.sort((a, b) => {
+        const titleA = a.title.toLowerCase(); // Convert to lowercase for case-insensitive comparison
+        const titleB = b.title.toLowerCase();
+        if (titleA < titleB) return -1; // a comes before b
+        if (titleA > titleB) return 1;  // a comes after b
+        return 0; // a and b are equal
+    });
+
+
+
     for (let book of myLibrary) {
         const libraryCard = document.createElement('div');
         libraryCard.classList.add('libraryCard');
@@ -54,7 +75,7 @@ function libraryLoop() {
 
         const readBookButton = document.createElement('button');
         readBookButton.classList.add('readBook');
-        readBookButton.innerText = 'Read Book';
+        readBookButton.innerText = 'Read?';
 
         cardButtons.append(delBookButton, readBookButton);
         libraryCard.append(cardTitle, cardAuthor, cardPages, cardRead, cardButtons);
@@ -91,7 +112,7 @@ document.querySelector('form[name="addBook"]').addEventListener("submit", (event
     }
 });
 
-
+//remove book from library
 library.addEventListener('click', (event) => {
     if (event.target.classList.contains('delBook')) {
         // Find the book index using the card title
@@ -107,9 +128,43 @@ library.addEventListener('click', (event) => {
     }
 });
 
+library.addEventListener('click', (event) => {
+    if (event.target.classList.contains('readBook')) {
+        // Find the book index using the card title
+        const card = event.target.closest('.libraryCard');
+        const title = card.querySelector('.bookTitle').innerText;
+
+        // Find the book in the array and remove it
+        const index = myLibrary.findIndex(book => book.title === title);
+        if (index !== -1) {
+            myLibrary[index].readStatus()
+        }
+    }
+});
 
 
-addBookToLibrary("Another Book!", "Sean Connery", "200 pages", "read");
+
+//change read status
+
+// library.addEventListener('click', (event) => {
+//     if (event.target.classList.contains('readBook')) {
+//         // Find the book index using the card title
+//         const card = event.target.closest('.libraryCard');
+//         const title = card.querySelector('.bookTitle').innerText;
+
+//         // Find the book in the array and change the read status
+//         const index = myLibrary.findIndex(book => book.title === title);
+//         if (index !== -1 && myLibrary[index].read === 'notRead') {
+//             myLibrary[index].read = 'read' // Remove book from array
+//             libraryLoop(); // Refresh library display
+//         }
+//     }
+// });
+
+
+
+
+addBookToLibrary("Another Book Another Book! Another Book! Another Book Another Book!", "Sean Connery", "200 pages", "read");
 
 addBookToLibrary("More Books", "Tim Letterman", "100 pages", "notRead");
 
