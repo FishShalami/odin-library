@@ -1,6 +1,9 @@
 const myLibrary = [];
 
+let bookIdCounter = 0;
+
 function Book(title, author, pages, read) {
+    this.id = bookIdCounter++;
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -49,6 +52,7 @@ function libraryLoop() {
     for (let book of myLibrary) {
         const libraryCard = document.createElement('div');
         libraryCard.classList.add('libraryCard');
+        libraryCard.setAttribute('data-id', book.id); // Store the unique ID
         
         const cardTitle = document.createElement('p');
         cardTitle.classList.add('bookTitle');
@@ -117,10 +121,11 @@ library.addEventListener('click', (event) => {
     if (event.target.classList.contains('delBook')) {
         // Find the book index using the card title
         const card = event.target.closest('.libraryCard');
-        const title = card.querySelector('.bookTitle').innerText;
+        const bookId = parseInt(card.getAttribute('data-id')); // Get the unique ID
+
 
         // Find the book in the array and remove it
-        const index = myLibrary.findIndex(book => book.title === title);
+        const index = myLibrary.findIndex(book => book.id === bookId);
         if (index !== -1) {
             myLibrary.splice(index, 1); // Remove book from array
             libraryLoop(); // Refresh library display
@@ -132,12 +137,12 @@ library.addEventListener('click', (event) => {
     if (event.target.classList.contains('readBook')) {
         // Find the book index using the card title
         const card = event.target.closest('.libraryCard');
-        const title = card.querySelector('.bookTitle').innerText;
+        const bookId = parseInt(card.getAttribute('data-id'));
 
         // Find the book in the array and remove it
-        const index = myLibrary.findIndex(book => book.title === title);
-        if (index !== -1) {
-            myLibrary[index].readStatus()
+        const book = myLibrary.find(book => book.id === bookId);
+        if (book) {
+            book.readStatus()
         }
     }
 });
